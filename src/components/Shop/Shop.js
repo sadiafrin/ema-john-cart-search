@@ -26,9 +26,9 @@ const Shop = () => {
             // console.log(addedProduct);
 
             // step:3 get quantity of the product
-            const quantity = storedCart[id];
-            addedProduct.quantity = quantity;
-            console.log(addedProduct);
+            // const quantity = storedCart[id];
+            // addedProduct.quantity = quantity;
+            // console.log(addedProduct);
         }
     },[products])
 
@@ -37,7 +37,7 @@ const Shop = () => {
         // cart.push(product);
         const newCart = [...cart, product];
         setCart(newCart);
-        addToDb(product.id)
+       addToDb(product.id);
 }
     return (
         <div className="shop-container">
