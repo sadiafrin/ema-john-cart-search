@@ -2,35 +2,40 @@ import React, { useEffect, useState } from 'react';
 import './Shop.css'
 import Product from '../Product/Product';
 import Cart from '../Cart/Cart';
-import { addToDb, getShoppingCart } from '../../utilities/fakedb';
+import { addToDb, getShoppingCart, getStoredCart } from '../../utilities/fakedb';
 
 const Shop = () => {
     const [products, setProducts] =useState([]);
     const [cart, setCart] = useState([]);
 
     useEffect (() => {
+        console.log('products load before fetch')
         fetch('products.json')
         .then(res => res.json())
-        .then(data => setProducts(data))
+        .then(data =>{
+            setProducts(data);
+            console.log('products loaded')
+        }) 
 
-    },[]);
+    },[products]);
 
-    useEffect(() => {
-        
-        const storedCart = getShoppingCart();
-        // step 1: get id
-        for (const id in storedCart){
-            // step: 2 get the product by using id
-            // console.log(id);
-            const addedProduct = products.find(product => product.id === id);
-            // console.log(addedProduct);
-
-            // step:3 get quantity of the product
-            // const quantity = storedCart[id];
-            // addedProduct.quantity = quantity;
-            // console.log(addedProduct);
+  useEffect (() =>{
+    console.log('local storage first line', products)
+    const storedCard =getStoredCart();
+    const savedCart= [];
+    for(const id in storedCard){
+        const addedProduct = products.find(product => product.id === id);
+        if (addedProduct){
+            const quantity = storedCard[id];
+            addedProduct.quantity= quantity;
+            savedCart.push(addedProduct);
         }
-    },[products])
+
+    }
+    setCart(savedCart);
+    // console.log('local storage finished');
+
+  },[products])
 
     const handleAddToCart = (product) =>{
         console.log(product);
