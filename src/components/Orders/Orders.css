@@ -1,0 +1,10 @@
+.review-items-container{
+    margin: 0 auto;
+}
+.proceed-checkout-btn {
+    background-color:rgb(226, 200, 150);;
+    border: 0;
+    border-radius: 8px;
+    padding:5px;
+    cursor: pointer;
+}

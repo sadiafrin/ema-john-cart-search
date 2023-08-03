@@ -3,6 +3,9 @@ import useProducts from '../../hooks/useProducts';
 import useCart from '../../hooks/useCart';
 import Cart from '../Cart/Cart';
 import ReviewItem from '../ReviewItem/ReviewItem';
+import { removeFromDb } from '../../utilities/fakedb';
+import { Link } from 'react-router-dom';
+import './Orders.css'
 
 const Orders = () => {
     const [products, setProducts] = useProducts();
@@ -11,6 +14,7 @@ const Orders = () => {
     const handleRemoveProduct = product =>{
         const rest = cart.filter(pd => pd.id !== product.id);
         setCart(rest);
+        removeFromDb(product.id);
     }
 
 
@@ -27,7 +31,11 @@ const Orders = () => {
 
             </div>
             <div className="cart-container">
-                <Cart cart ={cart}></Cart>
+                <Cart cart ={cart}>
+                    <Link to="/inventory">
+                        <button className="proceed-checkout-btn">Proceed Checkout</button>
+                    </Link>
+                </Cart>
             </div>
         </div>
     );

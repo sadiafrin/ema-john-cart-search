@@ -11,6 +11,16 @@
 .cart-container{
     background-color: rgb(183, 196, 191);
 }
+
+.proceed-checkout-btn{
+    background-color:rgb(226, 200, 150);;
+    border: 0;
+    border-radius: 8px;
+    padding:5px;
+    margin:5px;
+    cursor: pointer;
+}
+
 @media screen and (max-width:1100px){
     .products-container{
         grid-template-columns: repeat(2, 1fr);
